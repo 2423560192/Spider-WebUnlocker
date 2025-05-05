@@ -1,51 +1,58 @@
-import redis
-import json
-from tqdm import tqdm
+def encrypt_group(group):
+    result = []
+    for char in group:
+        # 获取字符的 ASCII 值
+        ascii_value = ord(char)
 
-# 连接你的 Upstash Redis
-r = redis.Redis(
-    host='amused-bream-11167.upstash.io',  # 例：xxx.upstash.io
-    port=6379,
-    password='ASufAAIjcDE4Y2Q5ZGY3ZDQ3OTc0ZmU5OTI3YzZlMWFmZjMyZDY2ZXAxMA',
-    ssl=True,
-    decode_responses=True
-)
+        # 执行左移3位并与右移5位进行按位或
+        encrypted = (ascii_value << 3) | (ascii_value >> 5)
 
-# 获取所有 key
-keys = list(r.scan_iter())
-print(f"共发现 {len(keys)} 个键，正在导出...")
+        # 异或0x5A
+        encrypted ^= 0x5A
 
-# 存储数据的结构
-backup_data = {}
+        # 左移2位并与取模6的结果进行按位或
+        encrypted = (encrypted << 2) | (encrypted % 6)
 
-# 遍历所有 key，并根据类型分别处理
-for key in tqdm(keys):
-    try:
-        key_type = r.type(key)
+        # 再次异或0x3F
+        encrypted ^= 0x3F
 
-        if key_type == 'string':
-            backup_data[key] = {'type': 'string', 'value': r.get(key)}
+        # 保持为一个字节范围
+        encrypted = encrypted % 0x100
 
-        elif key_type == 'hash':
-            backup_data[key] = {'type': 'hash', 'value': r.hgetall(key)}
+        # 将加密后的字符添加到结果列表中
+        result.append(chr(encrypted))
 
-        elif key_type == 'list':
-            backup_data[key] = {'type': 'list', 'value': r.lrange(key, 0, -1)}
+    # 返回加密后的字符串
+    return ''.join(result)
 
-        elif key_type == 'set':
-            backup_data[key] = {'type': 'set', 'value': list(r.smembers(key))}
 
-        elif key_type == 'zset':
-            backup_data[key] = {'type': 'zset', 'value': r.zrange(key, 0, -1, withscores=True)}
+def group_message(text, size=4):
+    # 将输入字符串按指定大小切分成小组
+    return [text[i:i + size] for i in range(0, len(text), size)]
 
-        else:
-            print(f"⚠️ 未支持的类型: {key_type}, key: {key}")
 
-    except Exception as e:
-        print(f"❌ 获取 {key} 失败: {e}")
+def merge_groups(groups):
+    # 合并所有小组，得到一个完整的字符串
+    return ''.join(groups)
 
-# 写入文件
-with open("redis_backup.json", "w", encoding="utf-8") as f:
-    json.dump(backup_data, f, ensure_ascii=False, indent=2)
 
-print("✅ 导出完成，保存在 redis_backup.json")
+def to_hex_string(data):
+    # 将每个字符转换为其对应的十六进制表示
+    return ''.join(f'{ord(c):02x}' for c in data)
+
+
+def OOOoO(input_string):
+    group_size = 4
+    # 将输入字符串分组
+    groups = group_message(input_string, group_size)
+    # 加密每一个分组
+    encrypted_groups = [encrypt_group(group) for group in groups]
+    # 合并加密后的分组
+    merged = merge_groups(encrypted_groups)
+    # 将最终结果转换为十六进制
+    return to_hex_string(merged)
+
+
+# 测试
+result = OOOoO("123456")
+print(result)

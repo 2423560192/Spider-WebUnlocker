@@ -8,7 +8,7 @@ import re
 import pandas as pd
 import requests
 from jsonpath_ng import parse
-
+if 
 
 def get_parse_data(data):
     result = {}
