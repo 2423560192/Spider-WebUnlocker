@@ -14,7 +14,7 @@ import base64
 
 # 与项目中完全相同的密钥
 ENCRYPT_KEY = "gNuRigdKZ4rMwKnpL2TXH4v51h33rRqt"
-authorization = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdXRoIjp7InBhc3N3b3JkIjpudWxsLCJ1c2VybmFtZSI6InpqcDEwMDEwMDAwOTc2NDQiLCJhdXRob3JpdGllcyI6W10sImFjY291bnROb25FeHBpcmVkIjp0cnVlLCJhY2NvdW50Tm9uTG9ja2VkIjp0cnVlLCJjcmVkZW50aWFsc05vbkV4cGlyZWQiOnRydWUsImVuYWJsZWQiOnRydWUsInVzZXJJZCI6MTAwMTAwMDA5NzY0NCwib3BlbklkIjoib0ZPODI2U293V1hTZ0tMb0FEc3lXYUtkMzlpcyIsInNjaG9vbElkIjo1LCJiaW5kZWQiOjB9LCJqdGkiOiJkNzg1MzRhZC04ZWQwLTQ0YTctOTIzOC00YWE5MjE1MmE0ZmQiLCJpYXQiOjE3NDU5MDg5NDYsImV4cCI6MTc0NjUxMzc0Nn0.eGZfgpvfc6E_jnhOPoHbyPwKLq_ZPhry7lNDluM03P4'
+authorization = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdXRoIjp7InBhc3N3b3JkIjpudWxsLCJ1c2VybmFtZSI6InpqcDEwMDEwMDAwNTMxMjciLCJhdXRob3JpdGllcyI6W10sImFjY291bnROb25FeHBpcmVkIjp0cnVlLCJhY2NvdW50Tm9uTG9ja2VkIjp0cnVlLCJjcmVkZW50aWFsc05vbkV4cGlyZWQiOnRydWUsImVuYWJsZWQiOnRydWUsInVzZXJJZCI6MTAwMTAwMDA1MzEyNywib3BlbklkIjoib0ZPODI2U2lSRjlCbE5KVXo3bWxoMWptaE8wYyIsInNjaG9vbElkIjo2LCJiaW5kZWQiOjB9LCJqdGkiOiJmYTBlMDJjZC03MzViLTRkMTMtYTdlOS05ZGI4MTI2MWFhNTUiLCJpYXQiOjE3NDYzNDU0NDQsImV4cCI6MTc0Njk1MDI0NH0.Mr6ymcBFU_ex9Vd2LThA2CySRRN0EnZuzMdeF8kZM10'
 
 
 def encrypt(text):
@@ -145,7 +145,7 @@ def generate_location_sign_qrcode(activity_id, sign_id, latitude, longitude, dis
         "signId": sign_id,
         "buttonType": button_type,
         "isHide": 0,
-        "type": '2',  # 类型固定为1
+        "type": '1',  # 类型固定为1
         "buttonName": button_name,
         "latitude": latitude,  # 添加纬度坐标
         "longitude": longitude,  # 添加经度坐标
