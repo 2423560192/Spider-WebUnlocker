@@ -154,7 +154,7 @@ def generate_sign_qrcode(activity_id, sign_id, button_type=1, button_name="签�
         "activityId": activity_id,
         "signId": sign_id,
         "buttonType": button_type,
-        "isHide": False,  # 添加isHide参数，与原始代码对应
+        "isHide": 1,  # 添加isHide参数，与原始代码对应
         "type": button_type,  # 1表示签到/签退二维码
         "buttonName": button_name
     }
@@ -237,8 +237,7 @@ def get_proxy():
 
 def main():
     # 自定义参数
-    activity_id = 15519  # 活动ID
-    activity_id = 11168  # 活动ID
+    activity_id = 16736  # 活动ID
     sign_id = None  # 签到ID（如果为None则通过API获取）
     button_type = 1  # 1=签到, 2=签退
     qrcode_type = 2  # 必须设置为2（动态刷新二维码）

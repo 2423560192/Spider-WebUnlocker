@@ -77,7 +77,7 @@ def get_sign_ids(activity_id, proxies=None):
         response.raise_for_status()
 
         data = response.json()
-
+        print(data)
         if data.get("code") == 0 and "data" in data and "list" in data["data"]:
             return data["data"]["list"]
         else:
@@ -145,11 +145,11 @@ def generate_location_sign_qrcode(activity_id, sign_id, latitude, longitude, dis
         "signId": sign_id,
         "buttonType": button_type,
         "isHide": 0,
-        "type": '1',  # 类型固定为1
+        "type": '2',  # 类型固定为1
         "buttonName": button_name,
         "latitude": latitude,  # 添加纬度坐标
         "longitude": longitude,  # 添加经度坐标
-        "distance": distance  # 添加有效距离范围(米)
+        # "distance": distance  # 添加有效距离范围(米)
     }
 
     # 如果是动态刷新二维码，添加时间戳和刷新时间
@@ -549,7 +549,7 @@ def create_location_qrcodes_batch(activity_id, sign_buttons, output_dir="qrcodes
 
 def main():
     # 自定义参数
-    activity_id = 15519  # 活动ID
+    activity_id = 16736  # 活动ID
     sign_id = None  # 签到ID（如果为None则通过API获取）
 
     # 提示用户选择操作
@@ -564,8 +564,26 @@ def main():
     if choice == "1":
         # 位置签到二维码
         activity_id = input(f"请输入活动ID (默认: {activity_id}): ").strip() or activity_id
-        sign_id_input = input("请输入签到ID (留空自动生成): ").strip()
-        sign_id = int(sign_id_input) if sign_id_input else None
+        sign_buttons = get_sign_ids(activity_id)
+
+        for i, button in enumerate(sign_buttons):
+            button_id = button.get('id', '未知')
+
+            button_name = button.get('name', '未命名')
+
+            button_type = button.get('buttonType', 1)
+
+            status = button.get('status', 0)
+
+            type_text = "签到" if button_type == 1 else "签退" if button_type == 2 else "未知类型"
+
+            status_text = "已开启" if status == 1 else "已停止" if status == 2 else "未知状态"
+
+            print(f"{i + 1}. ID: {button_id}, 名称: {button_name}, 类型: {type_text}, 状态: {status_text}")
+
+        button_index = input(f"请选择要生成位置二维码的按钮 (1-{len(sign_buttons)}): ").strip()
+
+        sign_id = int(sign_buttons[int(button_index) - 1]['id'])
 
         create_location_qrcode(activity_id, sign_id)
 
