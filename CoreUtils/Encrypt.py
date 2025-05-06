@@ -68,3 +68,30 @@ def sha256(data):
     hash_object = hashlib.sha256(data.encode())
     sha256_hash = hash_object.hexdigest()
     return sha256_hash
+
+
+import hmac
+import hashlib
+import base64
+
+
+def generate_hmac_sha1(message: str, secret: str, output_format: str = 'hex') -> str:
+    """
+    生成 HMAC-SHA1 签名。
+
+    参数:
+        message (str): 要签名的消息。
+        secret (str): 用于签名的密钥。
+        output_format (str): 输出格式，可选 'hex' 或 'base64'（默认 'hex'）。
+
+    返回:
+        str: 签名结果（十六进制或 Base64 编码）。
+    """
+    message_bytes = message.encode('utf-8')
+    secret_bytes = secret.encode('utf-8')
+    signature = hmac.new(secret_bytes, message_bytes, hashlib.sha1)
+
+    if output_format == 'base64':
+        return base64.b64encode(signature.digest()).decode()
+    else:
+        return signature.hexdigest()
