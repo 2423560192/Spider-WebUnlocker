@@ -549,7 +549,7 @@ def create_location_qrcodes_batch(activity_id, sign_buttons, output_dir="qrcodes
 
 def main():
     # 自定义参数
-    activity_id = 16615  # 活动ID
+    activity_id = 16859  # 活动ID
     sign_id = None  # 签到ID（如果为None则通过API获取）
 
     # 提示用户选择操作

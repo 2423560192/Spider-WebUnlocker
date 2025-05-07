@@ -1,5 +1,4 @@
-from datetime import datetime, timezone
+import base64
 
-current_time_ms = int(datetime.now(timezone.utc).timestamp() * 1000)
-
-print(current_time_ms)
+print(base64.b64encode("123456".encode()).decode())
+# 输出: 'MTIzNDU2'
