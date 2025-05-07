@@ -658,3 +658,5 @@ function get_r(){
     return _0x350b3a
 }
 
+console.log(get_r());
+
