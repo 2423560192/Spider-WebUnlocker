@@ -12,7 +12,7 @@ import pywasm
 
 import math
 
-import urllib.parse
+from urllib.parse import urlparse, parse_qs
 from CoreUtils.Encrypt import md5_encrypt, sha256, words_to_bytes, generate_hmac_sha1
 
 import subprocess
@@ -32,8 +32,22 @@ from Crypto.Util.Padding import pad, unpad
 
 
 
-def get_m():
-    pass
+def get_m(page):
+    result = subprocess.run(
+        ["node", "loader.js" , page],
+        capture_output=True,
+        text=True
+    )
+    url = result.stdout.strip()
+    # 解析 URL
+    parsed_url = urlparse(url)
+    # 解析查询参数
+    params = parse_qs(parsed_url.query)
+
+    # 提取 m 和 t
+    m = params.get('m', [None])[0]
+    t = params.get('t', [None])[0]
+    return m , t
 
 
 def get_resp(page):
@@ -67,12 +81,13 @@ def get_resp(page):
         # 'cookie': 'sessionid=xlu3qj58yo5zkjm328fr831ps08oid66; v=QXhITTA5RWtFcVA0NG5FdXk3eFlrZVNqSUJhdWZvVVVMX01wQlBPbkRKYjNoejlJTzg2VndMOUNPZGVBMTc0NjU3NzY0MjAxMA==; _nano_fp=XpmYn5d8nqmJXpEbnC_uphO7sVYXWszj8oBunmms; Hm_lvt_b5d072258d61ab3cd6a9d485aac7f183=1746529458,1746535829,1746577481,1746582669; HMACCOUNT=74E03469813A9187; Hm_lpvt_b5d072258d61ab3cd6a9d485aac7f183=1746584761',
     }
 
-    m = get_m()
+    m , t = get_m(page)
+    print(m , t)
 
     params = {
         'page': page,
         'm': m,
-        't': page,
+        't': t,
     }
 
     response = requests.get('https://www.mashangpa.com/api/problem-detail/12/data/', params=params, cookies=cookies,
@@ -84,15 +99,13 @@ def get_resp(page):
 
 
 def parse_data(data):
-    nums = data['r']
-    k = data['k']
-    print(k)
-
-    res = json.loads(decrypt(nums, k))
-    print("res:::", res)
+    nums = data['current_array']
+    print(nums)
 
 
-    return res['current_array']
+
+
+    return nums
 
 
 if __name__ == '__main__':
