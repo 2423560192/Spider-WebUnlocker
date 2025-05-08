@@ -10845,7 +10845,7 @@ function get_m(p, tt) {
 
 }
 
-// 仅用于 Node.js 直接调用调试用
+
 if (typeof process !== 'undefined' && process.argv.length > 2) {
     const page = process.argv[2];
     const t = process.argv[3];
