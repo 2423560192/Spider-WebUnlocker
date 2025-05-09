@@ -1,4 +1,8 @@
-import base64
+import hashlib
 
-print(base64.b64encode("123456".encode()).decode())
-# 输出: 'MTIzNDU2'
+
+def hex_md5_utf16le(s: str) -> str:
+    return hashlib.md5(s.encode('utf-16le')).hexdigest()
+
+
+print(hex_md5_utf16le("123456"))

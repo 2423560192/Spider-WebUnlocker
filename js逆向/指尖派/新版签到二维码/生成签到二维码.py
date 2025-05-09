@@ -238,7 +238,7 @@ def get_proxy():
 
 def main():
     # 自定义参数
-    activity_id = 16859  # 活动ID
+    activity_id = 16272  # 活动ID
     sign_id = None  # 签到ID（如果为None则通过API获取）
     button_type = 1  # 1=签到, 2=签退
     qrcode_type = 2  # 必须设置为2（动态刷新二维码）
