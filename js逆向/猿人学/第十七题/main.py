@@ -10,9 +10,6 @@ from CoreUtils.Encrypt import md5_encrypt
 import execjs
 
 
-
-
-
 def get_resp(page):
     ua = get_random_ua()  # 假设你有这个函数
     tt = str(int(time.time()) * 1000)
@@ -56,13 +53,13 @@ def get_resp(page):
         return response.json()
 
 
-
 def parse_data(data):
     nums = data['data']
     res = []
     for i in nums:
         res.append(i['value'])
     return res
+
 
 if __name__ == '__main__':
     res = []
