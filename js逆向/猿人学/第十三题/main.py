@@ -113,9 +113,8 @@ def get_fisrt():
 
 if __name__ == '__main__':
     res = []
-    session = requests.Session()
+    yuan_ck = get_fisrt()
     for i in range(1, 6):
-        yuan_ck = get_fisrt()
         data = get_resp(str(i) , yuan_ck)
         nums = parse_data(data)
         res.extend(nums)
