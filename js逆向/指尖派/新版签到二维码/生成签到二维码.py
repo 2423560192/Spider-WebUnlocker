@@ -136,8 +136,8 @@ def create_qrcode(qr_data, size=180, output_file="sign_qrcode.png"):
     return output_file
 
 
-def generate_sign_qrcode(activity_id, sign_id, button_type=1, button_name="签到",
-                         qrcode_type=2, refresh_time=3600, output_file="sign_qrcode.png"):
+def generate_sign_qrcode(organizerId,activity_id, sign_id, button_type=1, button_name="签到",
+                         qrcode_type=2, refresh_time=3600, output_file="sign_qrcode.png" , ):
     """
     生成活动签到二维码
 
@@ -155,10 +155,12 @@ def generate_sign_qrcode(activity_id, sign_id, button_type=1, button_name="签�
         "activityId": activity_id,
         "signId": sign_id,
         "buttonType": button_type,
-        "isHide": 1,  # 添加isHide参数，与原始代码对应
-        "type": button_type,  # 1表示签到/签退二维码
-        "buttonName": button_name
+        "isHide": 0,  # 添加isHide参数，与原始代码对应
+        "type": 1,  # 1表示签到/签退二维码
+        "buttonName": button_name,
+        'organizerId': organizerId
     }
+    print(qr_data)
 
     # 如果是动态刷新二维码，添加时间戳和刷新时间
     if qrcode_type == 2:
@@ -238,7 +240,8 @@ def get_proxy():
 
 def main():
     # 自定义参数
-    activity_id = 11171  # 活动ID
+    activity_id = 18000  # 活动ID
+    organizerId = '1001000034817'
     sign_id = None  # 签到ID（如果为None则通过API获取）
     button_type = 1  # 1=签到, 2=签退
     qrcode_type = 2  # 必须设置为2（动态刷新二维码）
@@ -253,6 +256,7 @@ def main():
     if sign_id is not None:
         output_file = os.path.join(output_dir, f"sign_{activity_id}_{sign_id}.png")
         output_file, expiry_time = generate_sign_qrcode(
+            organizerId,
             activity_id,
             sign_id,
             button_type,
@@ -305,6 +309,7 @@ def main():
         output_file = os.path.join(project_dir, filename)
 
         output_file, expiry_time = generate_sign_qrcode(
+            organizerId,
             activity_id,
             button_id,
             button_type,
