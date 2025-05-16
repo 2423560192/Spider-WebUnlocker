@@ -1,10 +1,11 @@
+import datetime
 import json
 import time
 
 import requests
 from jsonpath import jsonpath
 
-from utils import get_sign
+from utils import get_sign, format_timestamp
 
 import json
 
@@ -34,38 +35,38 @@ class TaobaoSpider:
             "cookie2": "175d2764148381a1480a760aca368ce0",
             "t": "52362914eedb2269b995a5e9344af16f",
             "_tb_token_": "e17351b38b196",
-            "unb": "2206787696506",
-            "uc1": "existShop=false&pas=0&cookie15=VT5L2FSpMGV7TQ%3D%3D&cookie14=UoYajLScRzlGgg%3D%3D&cookie21=VFC%2FuZ9aidsF3vBAgQ%3D%3D&cookie16=WqG3DMC9UpAPBHGz5QBErFxlCA%3D%3D",
             "sn": "",
-            "uc3": "lg2=W5iHLLyFOGW7aA%3D%3D&vt3=F8dD2EXfIUA88DsXjc0%3D&nk2=F5RHpC2cIoejhjw%3D&id2=UUphzOV5nsYb%2Bf81eg%3D%3D",
-            "csg": "84a1a321",
             "lgc": "tb256721506",
             "cancelledSubSites": "empty",
-            "cookie17": "UUphzOV5nsYb%2Bf81eg%3D%3D",
             "dnk": "tb256721506",
-            "skt": "3f3681c5c5de4fa2",
-            "existShop": "MTc0NzE5NDMwMA%3D%3D",
-            "uc4": "nk4=0%40FY4MthPoY97ivHUhM%2Bk6Wu64j1E2rg%3D%3D&id4=0%40U2grF862PT9uTiwTjVJofiu3WPaF89cn",
             "tracknick": "tb256721506",
             "_cc_": "UtASsssmfA%3D%3D",
-            "_l_g_": "Ug%3D%3D",
-            "sg": "663",
-            "_nk_": "tb256721506",
-            "cookie1": "WvSbKUmIvCaSCoZwCZArCpjV9oN31apKdqCn1Be9FSM%3D",
             "wk_cookie2": "12dd50cb3a72f253d3b9664d2219ec6c",
             "wk_unb": "UUphzOV5nsYb%2Bf81eg%3D%3D",
-            "sgcookie": "E100HcJgsHv5zKzLYvMvnKcik9%2BfWuWSCnNDX3amL9qhKTs3oBl9gOTFeqp3Npk7VL7YU2VLjKntigGnPWGechM1C70XMnL%2BYuEtGvCRuq1cDMA%3D",
-            "mtop_partitioned_detect": "1",
-            "_m_h5_tk": "2063070def441d557a1d9dae9b7f22d9_1747202582633",
-            "_m_h5_tk_enc": "a59be7e45d250d0ad984a5d3f07ea798",
-            "bxuab": "0",
             "cna": "KAJsH9kP0n4CAXuT+UD32lk5",
             "aui": "2206787696506",
             "sca": "edc108a1",
             "thw": "cn",
             "xlly_s": "1",
-            "tfstk": "g5CxI4vQ5uq0w4fvrZyoIyohS3ao68b4mi7IshxmCgIR53cguI2w6GKRbnvDGnc96NINjGQauFt1fGKGn8VhuZRw1kxTtWbqs_pw3OHXfPOWueaklmFkgrOw1kqnEf949CSf1EByGYTW4FLsfxs6NYTH7CT6CdaJVFLECms1fzKWoEt65h91PLT2VhO61G_7yF-W5COspPE9Vqti69PtFiP4Ahls1_LvF8bXVx-CNEpvAZ1x1fgekKKCl3ZbgM_XFNJO_Vl9cZ6FbesjckvV5TIJkCFohB_RCMLPGWmvztb5-3_K7f7XM9CpGtErUIjANQ1fpVG1yIK2BUprDuKCga1eNLVQJa1PmZ5RSVN6rMx5usOTOyRvGnOJz1qrGhB5Csv2_mZH3N6R2EdC4R5h9e8rxHLihzU-QAJXz-Tyrvoqz0_XyH4Y6AkwUz8JxzU-QAJXzUK3kPHZQLzP.",
-            "isg": "BDo6RSHvBpFxEoS8YITVSzGsi2Bc677FlXaxgEQzxE2YN9txLXtQ1bhJh8PrpzZd"
+            "mtop_partitioned_detect": "1",
+            "_m_h5_tk": "d5bbfd9f6d9b6578c1dbf5304670ad59_1747210780134",
+            "_m_h5_tk_enc": "b8a6c497295284991a7b584f87da1384",
+            "3PcFlag": "1747204242550",
+            "unb": "2206787696506",
+            "uc1": "cookie16=UIHiLt3xCS3yM2h4eKHS9lpEOw%3D%3D&existShop=false&pas=0&cookie15=Vq8l%2BKCLz3%2F65A%3D%3D&cookie21=W5iHLLyFeDV1cfTOQA%3D%3D&cookie14=UoYajLe8Vz4NeQ%3D%3D",
+            "uc3": "vt3=F8dD2EXfIMKUPUT%2BOP4%3D&lg2=WqG3DMC9VAQiUQ%3D%3D&id2=UUphzOV5nsYb%2Bf81eg%3D%3D&nk2=F5RHpC2cIoejhjw%3D",
+            "csg": "208cd87c",
+            "cookie17": "UUphzOV5nsYb%2Bf81eg%3D%3D",
+            "skt": "5ba1cbdf2feda41b",
+            "existShop": "MTc0NzIwNDI0OA%3D%3D",
+            "uc4": "nk4=0%40FY4MthPoY97ivHUhM%2Bk6Wu1Y2bhlYA%3D%3D&id4=0%40U2grF862PT9uTiwTjVJofiu3WzLSncoZ",
+            "_l_g_": "Ug%3D%3D",
+            "sg": "663",
+            "_nk_": "tb256721506",
+            "cookie1": "WvSbKUmIvCaSCoZwCZArCpjV9oN31apKdqCn1Be9FSM%3D",
+            "sgcookie": "E100Y85BdKIpi4mkavfla9IZDWqK5HaBgGOM4g0yQ2OCHLns8R6n63jFd6DZNpDV1vTTdrHZyctP1lvPeR4EEd0cfq3wg%2B%2FR%2BassUm%2B%2FhsYfdV0%3D",
+            "tfstk": "gyJrQvieCYHy4p7RZK6U_OF9cWXJt9usUp_CxHxhVablPHjhLEYI2atnyeJFoHdS26g8Yup27JwSybK3L96n5VMsC3K5p90_txmweuICxwquRwx0o9sEUqGbl3KRp9qb-fOD2k7O2S1hxwmVnMSP-9VlximVYG7hKaf3oSjGo9XhZJ4cmGSQK7buEm-ckMXh-efo0sbAxxMHqH2Vf_mIjlQ2w2osSw-luJ2HEvCA7-bRDgvVk_7GiNwhcKSPaNxyQye5nivX311bAfBDXITl0OkbZOx2tFRMJfNAUHAkJs8-kS7XiLKh-sZ3Qn-wqCXDdDqOgEjFs9f4xJxVeZYeFODguidDVBvJzkyh2L91TNCqxJCCnd1MsUrKXnXlxeC9dVeRrHx9BC6Zh7XM0BYwTg8QJiVzVpdz-W5lDi7s0m-_VbF1bg9PhWFdiOIV50s79WClDi7s0mPL9sjO0Ni5V",
+            "isg": "BCgow-cX1O8lUPaqhm7nZb8m-RY6UYxby6zjNuJaQKO0Pc-njGKt6ik7NdXNDUQz"
         }
 
         self.session.cookies.update(self.cookie)
@@ -90,6 +91,7 @@ class TaobaoSpider:
         url = "https://h5api.m.taobao.com/h5/mtop.relationrecommend.wirelessrecommend.recommend/2.0/"
 
         params = {
+            "qSource": "manual",
             "pageNum": 2,
             "pageSize": 25,
             "itemLastCount": 48,
@@ -125,7 +127,7 @@ class TaobaoSpider:
             "timeout": "10000",
             "type": "json",
             "dataType": "json",
-            "callback": "mtopjsonp34",
+            # "callback": "mtopjsonp34",
             "data": data,
             # "bx-ua": "231\\u0021ORA7K4mUnS4+jIIkd+7o3zBjUGg0uSOn+fYFmLQQwGng0wmHntUSK+2ttWIwYfiRlXeQ+thKJXIvfegh2cGUuRIvbZ9fhRfZbrcyCwJp1Tn/1O6FZphC2AulaWUlfRBJq3bU1v0W87TgQDikKIFEkKqn/me4vvko5JhcqYNvyHwJvLPgQpw+ykcg5YdC1GhpxzZduewMmenoSwQRur1zpjO94AlsT9Ba2gXj7xGlnJinhiBclz/r+hMep4Dqk+I9xGdF43e1LglCok+++4mWYi++6PXgobpS+UADjDmnuOXMEuy19T1fHkZoQzm+uvlQeeQh1WOYZHsCTI4XXUuI2dGaCpqpMIQXBT7soGygRlUFVHWlHGoQ1Z5+yJGc35JdbI82eiIiOEmc/+YsZ2FtCb0elWtDk351bKJ5outcsK5TqrFM3NC7a5g9hDkQKaAXK4yVjQEH8VKLKzOxCXsSg5CbBsMwgZu8N173158HwBSewpjidAlfDemwQmqmH1h5oHujqw+69XSlj8F0+c4BCK5zxHbTxS4juvoiy1SZOyGDvwLM+ahcLdmP9vS56IxL7rWz3YSNCo6NOw1GZEX+Ga6Z68Y3s0rLg3YESC2iOnkM+AwjSpGUXmTlFDqQN/yxZYqX07F4Kdspgd1D0hEEdwoB0RNB/vvoGa+kHpY38DShyWxoYQdmDVHMNNY8pZtM21A8Cy3AyZ3KUwXRvONYzvQQDVINpA/4Sp3Ida3jgpbEcPLaU1F+gGhoOM/o/eTLdnDkIdeANFJ53notBqvxpesDz+e0/V6e25DrmQV8Mpih2rrMttXZifQ+25/5UJv5pSAOYFc/ZtFTNJa3uYQ/GC93XFUyIUai7CvSEHnrbgXHhB2j21CwPp6PhfyjdSL8F5aLZfP5kDg5D1uW/8T39HnKXHaQgNVpDGREJHyBf8IrX5glAsNdAuZL2UWc54+PqOmZUoAYS1gqhC1Z3HFZQZlagG6yTNwDz5kZw8dKRZU7t9PVrl0W0qoYMZjn2K/XaPDfaUw4Q5fW3omGh2T93dwlzKi0c1hoTuya/bg+J58BMTDkLsTbGaHxIcAcHyg5sQVHtAG1EGrcetwbBVHUG2bzdFXTL6U/vXp6zC2HhkVmpPxfiJswVMQVuA4tni7aob1fm+OqPc+fIo4L/qk3m9+BbkFe4qxful1opaXp9FJiiYOPCO/iY4kw/F4OZaHNgD2WREo5lNZo+PEOjrcbXjKqru0KDXBZh9U3RaE+UZYgqZwUZa9bsGB8Ud9A6QoyKnCJICvysHsQzjMzfZuM6nYwhGfmnNi/gRvEGO0ZOe/COBLT5js/DBSAy6iCai3AkJvdnzjwzSz/5fEe+2U8u1lBln0cwW5DK7sazkzcHces2v3vrNwSt6kQUtBsbH24/mrR8M7+Hsk+d2PqxPr67XTTPoPveEZ8ZdbCcBmOV3HZcW/TLiM2uJsTXKbpOorV8k4bE+kb0ICNFMuh9emVWcP7gX1D/TkdmjNdS7bKjbiJuAzR0gEBcM2cvbZiG8/2Z3PZ6MKQPQcSSSUP47BaDFiJ0q7ybo09v4HEax8kIL2kwlYdlfMiFueeao+qqTtD6Kg76y+uII9HC0D4ozRPRT0NEuXXGJ+WUeoAOCYtCHb4ZGbZ1RHnhhNVoj3ntL+uvs3Wnz567j8bsF3qIwFVzu0MBNCN3ntu/CGEZwbdLS0SDbUzwEiAIqJZ3Sas1buIzM99AQ8KW2Y6STLAh7zwjuTQ8sbLGqrxpVeopeQpr6nKlaxSfpJC87eQ92j8N7EkjmSwhK2GPPfL1Ul7MZLqtqfYzsz9SekZDt7lgYOI9kNuPOgssHTMhIHnWcyxgDVdbEHt09u6EhQ8EtM6gGIyRIevrRLS",
             "bx-umidtoken": "T2gAFiZPRNsq7pnNBc4WOTUh1-Stl_LSTbVboK_gHOrDu8ohxav7LTpy2pZ0pxE0x_k=",
@@ -179,13 +181,13 @@ class TaobaoSpider:
         # 优惠券信息
         res = []
         try:
-            promotionTitle = jsonpath(data, '$.data..promotionTitle')
+            promotionTitle = jsonpath(data, '$..data..promotionTitle')
             if promotionTitle:
                 res.append(promotionTitle[0])
 
-            coupon_info = jsonpath(data, '$.data..itemApplyParams')
+            coupon_info = jsonpath(data, '$..data..itemApplyParams')
             if coupon_info:
-                res.append(json.loads(coupon_info)[0])
+                res.append(json.loads(coupon_info[0])[0]['couponName'])
 
         except:
             res = ["无优惠券信息"]
