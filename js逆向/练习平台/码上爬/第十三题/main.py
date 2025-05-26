@@ -36,7 +36,7 @@ from Crypto.Util.Padding import pad, unpad
 
 
 def get_r():
-    r = execjs.compile(open('loader.js', 'r', encoding='utf-8').read()).call('get_r' )
+    r = execjs.compile(open('loader.js', 'r', encoding='utf-8').read()).call('get_r')
     print("r:::" ,r)
     return r
 

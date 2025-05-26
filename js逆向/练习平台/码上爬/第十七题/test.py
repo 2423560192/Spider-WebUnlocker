@@ -47,5 +47,5 @@ def extract_text_from_font(font_path):
     return font_map
 
 
-font_file_path = r"D:\projects\Spider-WebUnlocker\js逆向\码上爬\第十七题\fa-solid-900.woff2"
+font_file_path = r"/js逆向/练习平台/码上爬/第十七题/fa-solid-900.woff2"
 print(extract_text_from_font(font_file_path))

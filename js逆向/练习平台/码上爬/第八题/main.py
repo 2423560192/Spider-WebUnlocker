@@ -33,7 +33,7 @@ def get_m(input_str, key):
 def get_s(tt):
     input_string = f'xoxoxoxo{tt}'
 
-    res = execjs.compile(open('loader.js' , 'r' , encoding='utf-8').read()).call('OOOoO' , input_string)
+    res = execjs.compile(open('loader.js', 'r', encoding='utf-8').read()).call('OOOoO', input_string)
     return res
 
 
