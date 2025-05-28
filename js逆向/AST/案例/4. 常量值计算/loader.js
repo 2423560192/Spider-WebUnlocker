@@ -23,17 +23,20 @@ let ast = parser.parse(jsCode)
 
 
 const visitor = {
-    "BinaryExpression|UnaryExpression|ConditionalExpression"(path) {
-        if (path.isUnaryExpression({operator: "+"}) || path.isUnaryExpression({operator: "void"})) {
-            return;
+    "BinaryExpression": {
+        exit(path) {
+            if (path.isUnaryExpression({operator: "+"}) || path.isUnaryExpression({operator: "void"})) {
+                return;
+            }
+
+            const {confident, value} = path.evaluate();
+            if (!confident || value === "Infinity") return;
+            if (typeof value === "number" && isNaN(value)) return;
+
+            path.replaceWith(types.valueToNode(value));
         }
-
-        const {confident, value} = path.evaluate();
-        if (!confident || value === "Infinity") return;
-        if (typeof value === "number" && isNaN(value)) return;
-
-        path.replaceWith(types.valueToNode(value));
     }
+
 };
 
 
