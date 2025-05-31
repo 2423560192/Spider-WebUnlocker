@@ -71,7 +71,6 @@ function b(f, g) {
 function callEncryptFunction(c, d) {
     const g = window['exports']['encrypt'](c, d);
     return g;
-
 }
 
 

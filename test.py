@@ -1,8 +1,21 @@
-import hashlib
+import collections
+
+Card = collections.namedtuple('Card', ['rank', 'suit'])
 
 
-def hex_md5_utf16le(s: str) -> str:
-    return hashlib.md5(s.encode('utf-16le')).hexdigest()
+class FrenchDeck:
+    ranks = [str(n) for n in range(2, 11)] + list('JQKA')
+    suits = 'spades diamonds clubs hearts'.split()
+
+    def __init__(self):
+        self._cards = [Card(rank, suit) for suit in self.suits for rank in self.ranks]
+
+    def __len__(self):
+        return len(self._cards)
+
+    def __getitem__(self, position):
+        return self._cards[position]
 
 
-print(hex_md5_utf16le("123456"))
+deck = FrenchDeck()
+print(deck.__len__())
