@@ -1,0 +1,282 @@
+syntax = "proto3";
+
+package douyin;
+
+
+message PushFrame {
+  uint64 SeqID = 1;
+  uint64 LogID = 2;
+  int32 service = 3;
+  int32 method = 4;
+  string payload_encoding = 6;
+  string payload_type = 7;
+  bytes payload = 8;
+  string LodIDNew = 9;
+}
+
+
+message Common {
+  optional string method = 1;
+  optional int64 msg_id = 2;
+  optional int64 room_id = 3;
+  optional int64 create_time = 4;
+  optional int32 monitor = 5;
+  optional bool is_show_msg = 6;
+  optional string describe = 7;
+  optional Text display_text = 8;
+  optional int64 fold_type = 9;
+  optional int64 anchor_fold_type = 10;
+  optional int64 priority_score = 11;
+  optional string log_id = 12;
+  optional string msg_process_filter_k = 13;
+  optional string msg_process_filter_v = 14;
+  optional User user = 15;
+  optional Room room = 16;
+  optional int64 anchor_fold_type_v2 = 17;
+  optional int64 process_at_sei_time_ms = 18;
+  optional int64 random_dispatch_ms = 19;
+  optional bool is_dispatch = 20;
+  optional int64 channel_id = 21;
+  optional int64 diff_sei2abs_second = 22;
+  optional int64 anchor_fold_duration = 23;
+  optional int64 app_id = 24;
+}
+
+message FollowInfo {
+    optional int64 target_user_id = 1;
+    optional int64 follow_status = 2;
+    optional string target_open_id = 5000;  // 5000 用作字段编号（非常规数字）
+}
+
+message PayGrade {
+    optional int64 total_diamond_count = 1;
+    optional Image diamond_icon = 2;
+    optional string name = 3;
+    optional Image icon = 4;
+    optional string next_name = 5;
+    optional int64 level = 6;
+    optional Image next_icon = 7;
+    optional int64 next_diamond = 8;
+    optional int64 now_diamond = 9;
+    optional int64 this_grade_min_diamond = 10;
+    optional int64 this_grade_max_diamond = 11;
+    optional int64 pay_diamond_bak = 12;
+    optional string grade_describe = 13;
+    repeated GradeIcon grade_icon_list = 14;
+    optional int64 screen_chat_type = 15;
+    optional Image im_icon = 16;
+    optional Image im_icon_with_level = 17;
+    optional Image live_icon = 18;
+    optional Image new_im_icon_with_level = 19;
+    optional Image new_live_icon = 20;
+    optional int64 upgrade_need_consume = 21;
+    optional string next_privileges = 22;
+    optional Image background = 23;
+    optional Image background_back = 24;
+    optional int64 score = 25;
+    optional GradeBuffInfo buff_info = 26;
+    optional bool grade_describe_shining = 27;
+    optional string grade_banner = 1001;
+    optional Image profile_dialog_bg = 1002;
+    optional Image profile_dialog_bg_back = 1003;
+}
+
+
+message User  {
+  string id = 1;
+  string short_id = 2;
+  string nickname = 3;
+  int32 gender = 4;
+  string signature = 5;
+  int32 level = 6;
+  string birthday = 7;
+  string telephone = 8;
+  Image avatar_thumb = 9;
+  Image avatar_medium = 10;
+  Image avatar_large = 11;
+  bool verified = 12;
+  int32 experience = 13;
+  string city = 14;
+  int32 status = 15;
+  string create_time = 16;
+  string modify_time = 17;
+  int32 secret = 18;
+  string share_qrcode_uri = 19;
+  int32 income_share_percent = 20;
+  repeated Image badge_image_list = 21;
+  FollowInfo follow_info = 22;
+  PayGrade pay_grade = 23;
+  string special_id = 26;
+  Image avatar_border = 27;
+  Image medal = 28;
+  repeated Image real_time_icons = 29;
+  repeated Image new_real_time_icons = 30;
+  string top_vip_no = 31;
+  string pay_score = 34;
+  string ticket_count = 35;
+  bool with_commerce_permission = 39;
+  bool with_fusion_shop_entry = 40;
+  string total_recharge_diamond_count = 41;
+  string sec_uid = 46;
+  int32 user_role = 47;
+  string web_rid = 67;
+  string desensitized_nickname = 68;
+  bool is_anonymous = 71;
+  string webcast_uid = 73;
+  bool user_canceled = 83;
+  bool allow_be_located = 1001;
+  bool allow_find_by_contacts = 1002;
+  Image avatar_jpg = 1012;
+  string bg_img_url = 1013;
+  string id_str = 1028;
+  bool is_follower = 1029;
+  bool is_following = 1030;
+  string pay_scores = 1032;
+  bool verified_mobile = 1042;
+  string user_open_id = 5000;
+}
+
+message Image {
+  repeated string url_list = 1;             // repeated 表示数组
+  optional string uri = 2;
+  optional int64 height = 3;
+  optional int64 width = 4;
+  optional string avg_color = 5;
+  optional int32 image_type = 6;
+  optional string open_web_url = 7;
+  optional Content content = 8;              // Content 是嵌套 message，需要定义
+  optional bool is_animated = 9;
+  repeated NinePatchSetting flex_setting_list = 10;  // 数组
+  repeated NinePatchSetting text_setting_list = 11;  // 数组
+}
+message Content {
+    optional string name = 1;
+    optional string font_color = 2;
+    optional int64 level = 3;
+    optional string alternative_text = 4;
+  }
+
+message NinePatchSetting {
+    repeated int64 setting_list = 1;
+}
+
+message PublicAreaCommon {
+  optional Image user_label = 1;
+  optional int64 user_consume_in_room = 2;
+  optional int64 user_send_gift_cnt_in_room = 3;
+  optional int64 individual_priority = 4;
+  optional int64 support_pin = 6;
+  optional SuffixText suffix_text = 7;
+  optional int32 im_action = 8;
+  optional bool forbidden_profile = 9;
+  optional ChatReplyRespInfo reply_resp = 10;
+  optional int64 is_featured = 12;
+  optional bool need_filter_display = 13;
+  optional PersonalizedDisplayInfo personalized_display_info = 14;
+  optional int64 force_insertion_priority = 15;
+  optional ChatMentionInfo mention_info = 16;
+  optional HoverInfo hover_info = 17;
+}
+
+message LandscapeAreaCommon {
+  optional bool show_head = 1;
+  optional bool show_nickname = 2;
+  optional bool show_font_color = 3;
+  repeated string color_value = 4;
+  repeated int32 comment_type_tags = 5;
+}
+
+message Text {
+  optional string key = 1;
+  optional string default_pattern = 2;
+  optional TextFormat default_format = 3;
+  repeated TextPiece pieces = 4;
+}
+
+// 定义主消息结构
+message ChatMessage {
+  Common common = 1;
+  User user = 2;
+  string content = 3;
+  bool visible_to_sender = 4;
+  Image background_image = 5;
+  string full_screen_text_color = 6;
+  Image background_image_v2 = 7;
+  PublicAreaCommon public_area_common = 9;
+  Image gift_image = 10;
+  string agree_msg_id = 11;
+  int32 priority_level = 12;
+  LandscapeAreaCommon landscape_area_common = 13;
+  string event_time = 15;
+  bool send_review = 16;
+  bool from_intercom = 17;
+  bool intercom_hide_user_card = 18;
+  repeated int32 chat_tags = 19;
+  string chat_by = 20;
+  int32 individual_chat_priority = 21;
+  Text rtf_content = 40;
+  Text rtf_content_v2 = 41;
+}
+
+message Message {
+  string method = 1;
+  bytes payload = 2;
+  string msg_id = 3;      // 使用string存储int64String类型
+  int32 msg_type = 4;
+  string offset = 5;      // 使用string存储int64String类型
+  bool need_wrds_store = 6;
+  string wrds_version = 7; // 使用string存储int64String类型
+  string wrds_sub_key = 8;
+}
+
+
+message Response {
+  repeated Message messages = 1;
+  string cursor = 2;
+  string fetch_interval = 3;
+  string now = 4;
+  string internal_ext = 5;
+  int32 fetch_type = 6;
+  string heartbeat_duration = 7;
+  bool need_ack = 8;
+  string push_server = 9;
+  string live_cursor = 10;
+  bool history_no_more = 11;
+  string proxy_server = 12;
+}
+
+message PersonalizedDisplayInfo{
+
+}
+message ChatMentionInfo{
+
+}
+message HoverInfo{
+
+}
+message TextFormat{
+
+}
+message TextPiece{
+
+}
+
+message Room {
+  // TODO: 这里补充字段定义
+}
+
+message GradeIcon {
+  // TODO: 这里补充字段定义
+}
+
+message GradeBuffInfo {
+  // TODO: 这里补充字段定义
+}
+
+message SuffixText {
+  // TODO: 这里补充字段定义
+}
+
+message ChatReplyRespInfo {
+  // TODO: 这里补充字段定义
+}
