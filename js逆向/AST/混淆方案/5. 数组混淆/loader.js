@@ -1,0 +1,136 @@
+//AST核心组件的导入/加载
+
+// fs模块 用于操作文件的读写
+const fs = require("fs");
+// @babel/parser 用于将JavaScript代码转换为ast树
+const parser = require("@babel/parser");
+// @babel/traverse 用于遍历各个节点的函数
+const traverse = require("@babel/traverse").default;
+// @babel/types 节点的类型判断及构造等操作
+const types = require("@babel/types");
+const {TYPES} = require("@babel/types");
+// @babel/generator 将处理完毕的AST转换成JavaScript源代码
+const generator = require("@babel/generator").default;
+
+// 混淆的js代码文件
+const encode_file = "./encode.js"
+// 反混淆的js代码文件
+const decode_file = "./decode.js"
+
+// 读取混淆的js文件
+let jsCode = fs.readFileSync(encode_file, {encoding: "utf-8"});
+// 将javascript代码转换为ast树
+let ast = parser.parse(jsCode)
+
+
+let visitor = {
+    MemberExpression(path) {
+        let {node} = path
+        name = node.property.name
+        t_node = types.StringLiteral(name)
+        node.property = t_node
+        node.computed = true
+    }
+}
+
+traverse(ast, visitor)
+
+// 2.
+// 2.
+visitor_2 = {
+    Identifier(path) {
+        let {node} = path
+        let name = node.name
+        const RegExplArray = ['eval', 'parseInt', 'encodeURIComponent', 'Object', 'Function', 'Boolean', 'Number', 'Math', 'Date', 'String', 'Math.replaceWith'];
+
+        if (RegExplArray.indexOf(name) != -1) {
+            new_node = types.MemberExpression(types.Identifier("window"), types.stringLiteral(name), true)
+            path.replaceWith(new_node)
+        }
+
+
+    }
+}
+
+traverse(ast, visitor_2)
+
+// 3.
+const visitor_3 = {
+    NumericLiteral(path) {
+        let {node} = path
+        let value = node.value
+        let key = parseInt(Math.random() * (999999 - 100000) + 100000, 10);
+        let cripy_num = value ^ key
+        path.replaceWith(types.binaryExpression(
+            "^",
+            types.numericLiteral(cripy_num),
+            types.numericLiteral(key)
+        ));
+        path.skip();
+    }
+}
+
+traverse(ast, visitor_3)
+
+
+// 4.
+
+
+function b64_encode(str) {
+    return Buffer.from(str).toString("base64")
+}
+
+const visitor_4 = {
+    StringLiteral(path) {
+        let {node} = path;
+        let value = node.value
+        path.replaceWith(types.callExpression(
+            types.identifier("atob"),
+            [types.stringLiteral(b64_encode(value))]
+        ))
+        path.skip()
+    }
+}
+
+traverse(ast, visitor_4)
+
+
+// 5.
+function b64_encode(str) {
+    return Buffer.from(str).toString("base64")
+}
+
+var arry = []
+const visitor_5 = {
+    StringLiteral(path) {
+        let {node} = path;
+        let value = node.value
+        let index = arry.indexOf(value)
+        if (index == -1) {
+            let length = arry.push(value)
+            console.log(length)
+            index = length - 1
+        }
+        // 构造节点
+        path.replaceWith(types.memberExpression(
+            types.identifier("arry"),
+            types.numericLiteral(index),
+            true
+        ))
+    }
+}
+traverse(ast, visitor_5)
+// 转为node节点
+bigArry = arry.map(function (item, index) {
+    return types.stringLiteral(item)
+})
+bigArry = types.variableDeclarator(types.identifier("arry"), types.arrayExpression(bigArry))
+bigArry = types.variableDeclaration("var", [bigArry])
+ast.program.body.unshift(bigArry)
+
+
+// 将处理后的ast转换为js代码(反混淆后的代码)
+let {code} = generator(ast);
+// 保存代码
+fs.writeFile('decode.js', code, (err) => {
+});

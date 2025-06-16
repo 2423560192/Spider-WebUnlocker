@@ -280,3 +280,432 @@ message SuffixText {
 message ChatReplyRespInfo {
   // TODO: 这里补充字段定义
 }
+
+
+message GiftMessage {
+    Common common = 1;
+    int64 gift_id = 2;
+    int64 fan_ticket_count = 3;
+    int64 group_count = 4;
+    int64 repeat_count = 5;
+    int64 combo_count = 6;
+    User user = 7;
+    User to_user = 8;
+    int32 repeat_end = 9;
+    TextEffect text_effect = 10;
+    int64 group_id = 11;
+    int64 income_taskgifts = 12;
+    int64 room_fan_ticket_count = 13;
+    GiftIMPriority priority = 14;
+    GiftStruct gift = 15;
+    string log_id = 16;
+    int64 send_type = 17;
+    PublicAreaCommon public_area_common = 18;
+    Text tray_display_text = 19;
+    int64 banned_display_effects = 20;
+    GiftTrayInfo tray_info = 21;
+    AssetEffectMixInfo asset_effect_mix_info = 24;
+    bool display_for_self = 25;
+    string interact_gift_info = 26;
+    string diy_item_info = 27;
+    repeated int64 min_asset_set = 28;
+    int64 total_count = 29;
+    int32 client_gift_source = 30;
+    AnchorGiftData anchor_gift = 31;
+    repeated int64 to_user_ids = 32;
+    int64 send_time = 33;
+    int64 force_display_effects = 34;
+    string trace_id = 35;
+    int64 effect_display_ts = 36;
+    SendTogether send_together = 37;
+    ExtraEffect extra_effect = 38;
+    RoomHotInfo room_hot_info = 39;
+    string GiftPlayParam = 40;
+    int32 multi_send_effect_level = 41;
+    repeated SeriesPlayGift series_gift_data = 42;
+    bool use_room_message = 43;
+    int64 count = 44;
+    repeated string to_openids = 5000;
+}
+
+message LuckyMoneyGiftMeta {
+    // TODO: 添加字段
+}
+
+message GiftPanelOperation {
+    // TODO: 添加字段
+}
+
+message GiftBanner {
+    // TODO: 添加字段
+}
+
+message GiftBuffInfo {
+    // TODO: 添加字段
+}
+
+message GiftPreviewInfo {
+    // TODO: 添加字段
+}
+
+message GiftTip {
+    // TODO: 添加字段
+}
+
+message GoodsBizItem {
+    // TODO: 添加字段
+}
+
+message TextEffect {
+    // TODO: 补充字段定义
+}
+
+message GiftIMPriority {
+    // TODO: 补充字段定义
+}
+
+message SeriesPlayGift {
+    // TODO: 补充字段定义
+}
+message GiftStruct {
+    optional Image image = 1;
+    optional string describe = 2;
+    optional bool notify = 3;
+    optional int64 duration = 4;
+    optional int64 id = 5;
+    optional GiftStructFansClubInfo fansclub_info = 6;
+    optional bool for_linkmic = 7;
+    optional bool doodle = 8;
+    optional bool for_fansclub = 9;
+    optional bool combo = 10;
+    optional int32 type = 11;
+    optional int32 diamond_count = 12;
+    optional bool is_displayed_on_panel = 13;
+    optional int64 primary_effect_id = 14;
+    optional Image gift_label_icon = 15;
+    optional string name = 16;
+    optional string region = 17;
+    optional string manual = 18;
+    optional bool for_custom = 19;
+    optional Image icon = 21;
+    optional int32 action_type = 22;
+    optional int32 watermelon_seeds = 23;
+    optional string gold_effect = 24;
+    repeated LuckyMoneyGiftMeta subs = 25;
+    optional int64 golden_beans = 26;
+    optional int64 honor_level = 27;
+    optional int32 item_type = 28;
+    optional string scheme_url = 29;
+    optional GiftPanelOperation gift_operation = 30;
+    optional string event_name = 31;
+    optional int64 noble_level = 32;
+    optional string guide_url = 33;
+    optional bool punish_medicine = 34;
+    optional bool for_portal = 35;
+    optional string business_text = 36;
+    optional bool cny_gift = 37;
+    optional int64 app_id = 38;
+    optional int64 vip_level = 39;
+    optional bool is_gray = 40;
+    optional string gray_scheme_url = 41;
+    optional int64 gift_scene = 42;
+    optional GiftBanner gift_banner = 43;
+    repeated string trigger_words = 44;
+    repeated GiftBuffInfo gift_buff_infos = 45;
+    optional bool for_first_recharge = 46;
+    optional Image dynamic_img_for_selected = 47;
+    optional int32 after_send_action = 48;
+    optional int64 gift_offline_time = 49;
+    optional string top_bar_text = 50;
+    optional Image top_right_avatar = 51;
+    optional string banner_scheme_url = 52;
+    optional bool is_locked = 53;
+    optional int64 req_extra_type = 54;
+    repeated int64 asset_ids = 55;
+    optional GiftPreviewInfo gift_preview_info = 56;
+    optional GiftTip gift_tip = 57;
+    optional int32 need_sweep_light_count = 58;
+    repeated GiftGroupInfo group_info = 59;
+    optional Text bottom_text = 60;
+    optional int32 mystery_shop_status = 61;
+    repeated int64 optional_asset_ids = 62;
+    optional bool disable_wish_list = 63;
+    optional GiftMsgBoard gift_msg_board = 64;
+    optional EmojiInteractResource emoji_interact_resource = 65;
+    optional bool tray_dynamic_img_flippable = 66;
+    optional int64 pico_show_action = 67;
+    optional int64 selected_dynamic_effect = 68;
+    optional GiftTouchLabel gift_touch_label = 69;
+    optional GiftUnselectedBottomInfo unselected_bottom_info = 70;
+    optional GiftConfirmInfo gift_confirm_info = 71;
+    optional int32 biz_type = 72;
+    optional GoodsBizItem biz_item = 73;
+    optional Image webp_image = 74;
+    optional int32 gift_source = 75;
+    repeated int64 required_assets = 76;
+    optional Image selected_label = 77;
+    optional int64 sort_score = 78;
+    optional int64 topic_id = 79;
+    optional string sort_extra = 80;
+
+
+}
+// 嵌套类型声明（需要定义）
+message GiftStructFansClubInfo {
+        // TODO: 定义字段
+    }
+
+message GiftMsgBoard {
+        // TODO: 定义字段
+    }
+
+message GiftTrayInfo {
+    // TODO: 补充字段
+}
+
+message AssetEffectMixInfo {
+    // TODO: 补充字段
+}
+
+message AnchorGiftData {
+    // TODO: 补充字段
+}
+
+message SendTogether {
+    // TODO: 补充字段
+}
+
+message ExtraEffect {
+    // TODO: 补充字段
+}
+
+message RoomHotInfo {
+    // TODO: 补充字段
+}
+
+message GiftGroupInfo {
+    // TODO: 添加字段
+}
+
+message EmojiInteractResource {
+    // TODO: 添加字段
+}
+
+message GiftTouchLabel {
+    // TODO: 添加字段
+}
+
+message GiftUnselectedBottomInfo {
+    // TODO: 添加字段
+}
+
+message GiftConfirmInfo {
+    // TODO: 添加字段
+}
+
+
+// LikeMessage 主体
+message LikeMessage {
+  Common common = 1;
+  int64 count = 2;
+  int64 total = 3;
+  int64 color = 4;
+  User user = 5;
+  string icon = 6;
+  DoubleLikeDetail double_like_detail = 7;
+  DisplayControlInfo display_control_info = 8;
+  int64 linkmic_guest_uid = 9;
+  string scene = 10;
+  PicoDisplayInfo pico_display_info = 11;
+  PublicAreaCommon public_area_common = 12;
+}
+
+
+
+message DoubleLikeDetail {
+  // TODO
+}
+
+message DisplayControlInfo {
+  // TODO
+}
+
+message PicoDisplayInfo {
+  // TODO
+}
+
+message MemberMessage {
+  Common common = 1;
+  User user = 2;
+  int64 member_count = 3;
+  User operator = 4;
+  bool is_set_to_admin = 5;
+  bool is_top_user = 6;
+  int64 rank_score = 7;
+  int64 top_user_no = 8;
+  int64 enter_type = 9;
+  int64 action = 10;
+  string action_description = 11;
+  int64 user_id = 12;
+  EffectConfig effect_config = 13;
+  string pop_str = 14;
+  EffectConfig enter_effect_config = 15;
+  Image background_image = 16;
+  Image background_image_v2 = 17;
+  Text anchor_display_text = 18;
+  PublicAreaCommon public_area_common = 19;
+  int64 user_enter_tip_type = 20;
+  int64 anchor_enter_tip_type = 21;
+  PicoEffectConfig pico_enter_effect_config = 24;
+  string user_open_id = 5000;
+}
+
+message EffectConfig {
+  // TODO: 根据需要添加字段
+}
+
+message PicoEffectConfig {
+  // TODO: 根据需要添加字段
+}
+
+message SocialMessage {
+  Common common = 1;
+  User user = 2;
+  int64 share_type = 3;
+  int64 action = 4;
+  string share_target = 5;
+  int64 follow_count = 6;
+  PublicAreaCommon public_area_common = 7;
+  int64 share_total_count = 8;
+}
+
+message Contributor {
+    int64 score = 1;
+    int64 rank = 2;
+    int64 user_id = 3;
+    User user = 4;
+    string open_id = 5000;
+}
+
+message RoomUserSeqMessage {
+  Common common = 1;
+  repeated Contributor ranks = 2;
+  int64 total = 3;
+  string pop_str = 4;
+  repeated Contributor seats = 5;
+  int64 popularity = 6;
+  int64 total_user = 7;
+  string total_user_str = 8;
+  string total_str = 9;
+  string online_user_for_anchor = 10;
+  string total_pv_for_anchor = 11;
+  string up_right_stats_str = 12;
+  string up_right_stats_str_complete = 13;
+}
+
+message UpgradePrivilege {
+    // TODO: 根据实际字段补全，这里是占位结构
+    int32 level_before = 1;
+    int32 level_after = 2;
+    string privilege_desc = 3;
+}
+
+message FansclubMessage {
+  Common common = 1;                        // 公共字段
+  int32 action = 2;                         // 动作类型（如加入、升级等）
+  string content = 3;                       // 内容描述（例如 "加入粉丝团"）
+  User user = 4;              // 触发该动作的用户
+  UpgradePrivilege upgrade_privilege = 5;  // 升级信息
+  PublicAreaCommon public_area_common = 6; // 公共展示区域字段
+  int64 left_diamond = 7;                  // 用户剩余钻石数
+}
+
+message EmojiChatMessage {
+  Common common = 1;                            // 公共字段
+  User user = 2;                   // 发送者信息
+  int64 emoji_id = 3;                           // 表情 ID
+  Text emoji_content = 4;          // 表情内容（富文本）
+  string default_content = 5;                   // 默认文本内容
+  Image background_image = 6;      // 背景图
+  bool from_intercom = 7;                       // 是否来自连麦/内通
+  bool intercom_hide_user_card = 8;             // 内通时是否隐藏用户卡片
+  PublicAreaCommon public_area_common = 9;      // 公共区域展示信息
+}
+
+message RoomMessage {
+  Common common = 1;                              // 通用字段
+  string content = 2;                             // 文本内容
+  bool supprot_landscape = 3;                     // 是否支持横屏
+  int32 roomMessageType = 4;                      // 房间消息类型
+  bool system_top_msg = 5;                        // 是否为系统置顶消息
+  bool forced_guarantee = 6;                      // 是否强制保障推送
+  PublicAreaCommon public_area_common = 7;        // 公共区域展示控制
+  string biz_scene = 20;                          // 业务场景标识（如推荐位/入口来源等）
+  RoomMsgExtra extra = 40;                        // 扩展信息
+}
+
+message RoomStatsMessage {
+  Common common = 1;                 // 通用字段
+  string display_short = 2;         // 简短展示字符串
+  string display_middle = 3;        // 中等长度展示字符串
+  string display_long = 4;          // 长展示字符串
+  int64 display_value = 5;          // 展示数值
+  int64 display_version = 6;        // 展示版本号
+  bool incremental = 7;             // 是否为增量更新
+  bool is_hidden = 8;               // 是否隐藏展示
+  int64 total = 9;                  // 总数
+  int64 display_type = 10;          // 展示类型 ID
+}
+
+
+message RoomRank {
+    User user = 1;     // 用户信息
+    string score_str = 2;           // 分数字符串
+    bool profile_hidden = 3;        // 是否隐藏个人资料
+}
+
+message RoomRankMessage {
+  Common common = 1;                   // 通用字段
+  repeated RoomRank ranks = 2;        // 房间排名列表
+
+
+}
+
+message ControlMessage {
+  Common common = 1;                       // 通用字段
+  int64 action = 2;                        // 动作码，例如关闭直播等
+  string tips = 3;                         // 提示内容
+  Extra extra = 4;                         // 附加字段
+  PublicAreaCommon public_area_common = 5;// 公共区域信息
+
+}
+
+message Extra {
+    int64 promotion_id = 1;
+    bool active = 2;
+  }
+
+message RoomStreamAdaptationMessage {
+  Common common = 1;                     // 这里假设 Common 在别处定义了
+  int32 adaptation_type = 2;
+  float adaptation_height_ratio = 3;
+  float adaptation_body_center_ratio = 4;
+  float adaptation_content_top_ratio = 5;
+  float adaptation_content_bottom_ratio = 6;
+}
+
+message RoomMsgExtra {
+  RoomMsgGiftExtra gift_extra = 1;
+}
+
+message RoomMsgGiftExtra {
+  int64 gift_id = 1;
+  string gift_name = 2;
+  int64 gift_count = 3;
+  Image image = 4;
+  Image webp_image = 5;
+  int64 group_id = 6;
+  int32 client_gift_source = 7;
+  string describe = 8;
+  int64 diamond_count = 9;
+}

@@ -1,8 +1,6 @@
+window = global
 document = {}
-window = {}
 navigator = {'userAgent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
-
-var crawler;
 
 
 /** 1.0.0.53 */
@@ -5882,6 +5880,8 @@ if (!window.byted_acrawler) {
             }, this);
         }
 
+        window.sign = _0x5c2014
+
         function _0x3c875d(_0x17e2b2, _0x1e7967) {
             var _0x36f0c4 = _0x5612de
                 , _0x292251 = new Uint8Array(-0x1d76 + 0xa81 * -0x3 + 0x3cfc);
@@ -6234,6 +6234,8 @@ if (!window.byted_acrawler) {
                 0x1: arguments
             }, this);
         }
+
+
 
         function _0x252788(_0x468bb4, _0x392758, _0x269720) {
             var _0x16947c = _0x5612de;
@@ -6986,7 +6988,7 @@ if (!window.byted_acrawler) {
             _0x5b850b(),
             _0x59992f([_0x5612de(0x30c)]);
         var _0x1649bc = !(-0xc6b * -0x1 + -0x2315 + 0x16aa);
-        crawler = _0x5c2014
+
         _0x1d18f2['frontierSign'] = _0x5c2014,
             _0x1d18f2[_0x5612de(0x2e8)] = _0x32e4a6,
             _0x1d18f2[_0x5612de(0x3b9)] = _0x498349,
@@ -7003,9 +7005,9 @@ if (!window.byted_acrawler) {
     });
 }
 
-function get_sign(md5) {
+function get_sign(s) {
     let data = {
-        "X-MS-STUB": md5
+        "X-MS-STUB": s
     }
-    return crawler(data)["X-Bogus"];
+    return window.sign(data)["X-Bogus"];
 }
