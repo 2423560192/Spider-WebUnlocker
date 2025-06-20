@@ -1,26 +1,17 @@
-//AST核心组件的导入/加载
-
-// fs模块 用于操作文件的读写
-const fs = require("fs");
-// @babel/parser 用于将JavaScript代码转换为ast树
-const parser = require("@babel/parser");
-// @babel/traverse 用于遍历各个节点的函数
-const traverse = require("@babel/traverse").default;
-// @babel/types 节点的类型判断及构造等操作
+const files = require('fs');
 const types = require("@babel/types");
-// @babel/generator 将处理完毕的AST转换成JavaScript源代码
+const parser = require("@babel/parser");
+const traverse = require("@babel/traverse").default;
 const generator = require("@babel/generator").default;
+const template = require("@babel/template");
 
-// 混淆的js代码文件
-const encode_file = "./encode.js"
-// 反混淆的js代码文件
-const decode_file = "./decode.js"
+//js混淆代码读取
+let encodeFile = process.argv.length > 2 ? process.argv[2] : "./encode.js";
+let decodeFile = process.argv.length > 3 ? process.argv[3] : encodeFile.replace(".js", "_ok.js")
 
-// 读取混淆的js文件
-let jsCode = fs.readFileSync(encode_file, {encoding: "utf-8"});
-// 将javascript代码转换为ast树
-let ast = parser.parse(jsCode)
-
+//将源代码解析为AST
+let sourceCode = files.readFileSync(encodeFile, { encoding: "utf-8" });
+let ast = parser.parse(sourceCode);
 
 function isBaseLiteral(node) {
 
@@ -51,6 +42,7 @@ const decodeObjectofValue =
             let {node, scope} = path;
 
             const {id, init} = node;
+            let name = id.name;
 
             if (!types.isObjectExpression(init)) return;
 
@@ -120,7 +112,7 @@ const decodeObjectofValue =
                     canBeRemoved = false;
                     continue;
                 }
-
+                console.log(name + '.' + curKey , '------>' , newMap.get(curKey).value)
                 parentPath.replaceWith(newMap.get(curKey));
             }
 
@@ -133,8 +125,13 @@ const decodeObjectofValue =
 traverse(ast, decodeObjectofValue);
 
 
-// 将处理后的ast转换为js代码(反混淆后的代码)
-let {code} = generator(ast);
-// 保存代码
-fs.writeFile('decode.js', code, (err) => {
+
+console.timeEnd("处理完毕，耗时");
+
+
+let { code } = generator(ast, opts = {
+  "compact": false,  // 是否压缩代码
+  "comments": false,  // 是否保留注释
 });
+
+files.writeFile(decodeFile, code, (err) => { });

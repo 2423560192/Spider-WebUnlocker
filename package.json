@@ -4,9 +4,14 @@
     "@babel/parser": "^7.27.2",
     "@babel/traverse": "^7.27.1",
     "@babel/types": "^7.27.1",
+    "@fingerprintjs/fingerprintjs": "^4.6.2",
     "crypto-js": "^4.2.0",
+    "imurmurhash": "^0.1.4",
     "jquery": "^3.7.1",
-    "jsdom": "^26.1.0"
+    "jsdom": "^26.1.0",
+    "jsencrypt": "^3.3.2",
+    "murmurhash3js": "^3.0.1",
+    "murmurhash3js-revisited": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.27.1"

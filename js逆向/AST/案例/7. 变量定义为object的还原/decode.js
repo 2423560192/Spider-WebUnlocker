@@ -1,3 +1,7 @@
-var a = 123;
-b = a + 2;
-a = a + b;
+const config = {
+  a: 1,
+  b: 2,
+  c: function () {}
+};
+console.log(1 + 2);
+console.log(config.c);

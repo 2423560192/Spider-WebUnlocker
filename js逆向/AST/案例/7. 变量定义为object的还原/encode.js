@@ -1,17 +1,8 @@
-var a = 123;
-var b = -5;
-var c = String;
-var d = String.fromCharCode;
+const config = {
+  a: 1,
+  b: 2,
+  c: function (){}
+};
 
-function e() {
-    var f = c(123), g = d(0x31);
-    return a + b + f;
-}
-
-while (true) {
-    var h = 123;
-    var i = 111;
-    j = h + 456;
-    i = i + 222;
-}
-
+console.log(config.a + config.b);
+console.log(config.c);
