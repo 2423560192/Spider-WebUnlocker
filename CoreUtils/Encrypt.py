@@ -1,6 +1,6 @@
 import hashlib
 
-from Crypto.Cipher import AES
+from Crypto.Cipher import AES, DES3
 from Crypto.Util.Padding import pad, unpad
 import base64
 
@@ -95,3 +95,28 @@ def generate_hmac_sha1(message: str, secret: str, output_format: str = 'hex') ->
         return base64.b64encode(signature.digest()).decode()
     else:
         return signature.hexdigest()
+
+
+class Des3:
+    """3DES 加密解密"""
+    def __init__(self, key: str, iv: str):
+        # 取前24字节做key，确保符合3DES要求
+        raw_key = key.encode("utf-8")[:24]
+        self.key = DES3.adjust_key_parity(raw_key)  # 调整奇偶校验位
+
+        # IV必须是8字节
+        self.iv = iv.encode("utf-8")[:8]
+
+    def encrypt(self, data: str) -> str:
+        cipher = DES3.new(self.key, DES3.MODE_CBC, iv=self.iv)
+        padded_data = pad(data.encode("utf-8"), DES3.block_size)
+        encrypted = cipher.encrypt(padded_data)
+        # 返回base64字符串，方便存储/传输
+        return base64.b64encode(encrypted).decode("utf-8")
+
+    def decrypt(self, b64data: str) -> str:
+        encrypted = base64.b64decode(b64data)
+        cipher = DES3.new(self.key, DES3.MODE_CBC, iv=self.iv)
+        decrypted = cipher.decrypt(encrypted)
+        unpadded = unpad(decrypted, DES3.block_size)
+        return unpadded.decode("utf-8")
